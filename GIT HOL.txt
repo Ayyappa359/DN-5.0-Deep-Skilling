@@ -1,0 +1,98 @@
+GIT HANDS-ON LAB - ALL COMMANDS (Docs 1-5)
+Name: ayyappa | Email: ayyappakomala5@gmail.com | Project: GitDemo
+=====================================================================
+
+DOC 1: Git Setup, Notepad++ Integration, First Commit
+------------------------------------------------------
+git --version
+git config --global user.name "ayyappa"
+git config --global user.email "ayyappakomala5@gmail.com"
+git config --list
+notepad++
+git config --global core.editor "notepad++.exe -multiInst -nosession"
+git config --global -e
+git init GitDemo
+cd GitDemo
+ls -al
+echo "Welcome to the version control" >> welcome.txt
+ls -al
+cat welcome.txt
+git status
+git add welcome.txt
+git commit
+git status
+git pull origin master
+git push origin master
+
+DOC 2: Git Ignore
+------------------
+touch app.log
+mkdir log
+notepad++ .gitignore
+# Inside .gitignore add:
+# *.log
+# log/
+git status
+git add .gitignore
+git commit -m "Added gitignore to ignore log files and log folder"
+git status
+
+DOC 3: Branching and Merging
+------------------------------
+git branch GitNewBranch
+git branch -a
+git checkout GitNewBranch
+echo "Content added in new branch" >> branchfile.txt
+git add branchfile.txt
+git commit -m "Added branchfile.txt in GitNewBranch"
+git status
+git checkout master
+git diff master GitNewBranch
+git difftool master GitNewBranch
+git merge GitNewBranch
+git log --oneline --graph --decorate
+git branch -d GitNewBranch
+git status
+
+DOC 4: Conflict Resolution
+------------------------------
+git status
+git checkout -b GitWork
+echo "<hello>Version from GitWork branch</hello>" >> hello.xml
+git status
+git add hello.xml
+git commit -m "Added hello.xml in GitWork branch"
+git checkout master
+echo "<hello>Version from master branch</hello>" >> hello.xml
+git add hello.xml
+git commit -m "Added hello.xml in master branch"
+git log --oneline --graph --decorate --all
+git diff master GitWork
+git difftool master GitWork
+git merge GitWork
+git mergetool
+git add hello.xml
+git commit -m "Resolved merge conflict in hello.xml"
+git status
+notepad++ .gitignore
+# Add backup file pattern, e.g.:
+# *.orig
+git add .gitignore
+git commit -m "Updated gitignore to ignore backup files"
+git branch -a
+git branch -d GitWork
+git log --oneline --graph --decorate
+
+DOC 5: Cleanup and Push to Remote
+------------------------------------
+git status
+git branch -a
+git pull origin master
+git push origin master
+
+=====================================================================
+GITHUB NOTE:
+Since GitHub blocks Cognizant credentials (per the doc), use your personal
+GitHub account. Replace "origin" with your actual remote if needed:
+git remote add origin https://github.com/ayyappa/GitDemo.git
+git remote -v
